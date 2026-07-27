@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>クレジットカード比較 2026年7月版</title>
+<style>
+:root{
+  --ink:#0F1622;
+  --ink-2:#1A2434;
+  --brass:#C9A45C;
+  --brass-dim:#8E7440;
+  --paper:#F5F3EE;
+  --paper-2:#E8E4DA;
+  --text:#1C2333;
+  --text-mute:#5B6474;
+  --ok:#3F7A5E;
+  --mid:#B08428;
+  --ng:#A85141;
+  --rule:rgba(201,164,92,.28);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--ink);
+  color:var(--paper);
+  font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",YuGothic,Meiryo,system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 18px}
+
+/* ---------- header ---------- */
+header{
+  padding:52px 0 34px;
+  border-bottom:1px solid var(--rule);
+  background:
+    radial-gradient(120% 90% at 85% -10%, rgba(201,164,92,.12), transparent 60%),
+    var(--ink);
+}
+.eyebrow{
+  font-size:11px;letter-spacing:.28em;color:var(--brass);
+  text-transform:uppercase;margin:0 0 14px;font-weight:600;
+}
+h1{
+  font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,"MS PMincho",serif;
+  font-size:clamp(27px,5.4vw,44px);
+  line-height:1.3;margin:0 0 16px;font-weight:600;letter-spacing:.02em;
+}
+h1 .gold{color:var(--brass)}
+.lede{max-width:56ch;color:#C9CEDA;margin:0;font-size:14.5px}
+.asof{
+  margin-top:22px;padding:12px 15px;
+  border-left:2px solid var(--brass-dim);
+  background:rgba(201,164,92,.06);
+  font-size:12.5px;color:#B9C0CD;line-height:1.7;
+}
+
+/* ---------- legend ---------- */
+.legend{
+  display:flex;flex-wrap:wrap;gap:8px 22px;
+  padding:16px 0 0;font-size:13px;color:#C0C7D3;
+}
+.legend b{font-weight:600}
+.s-ok{color:#6FBF95}.s-mid{color:#E0B44E}.s-ng{color:#DE8878}
+
+/* ---------- section ---------- */
+section{padding:46px 0}
+h2{
+  font-family:"Hiragino Mincho ProN","Yu Mincho",YuMincho,serif;
+  font-size:22px;font-weight:600;margin:0 0 6px;letter-spacing:.04em;
+}
+h2 .num{color:var(--brass);font-size:15px;margin-right:10px;letter-spacing:.1em}
+.sec-note{color:#9AA3B2;font-size:13px;margin:0 0 22px}
+
+/* ---------- table ---------- */
+.tablewrap{
+  background:var(--paper);color:var(--text);
+  border-radius:3px;overflow:auto;
+  border:1px solid var(--brass-dim);
+  -webkit-overflow-scrolling:touch;
+}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:940px;font-size:13px}
+th,td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--paper-2)}
+thead th{
+  position:sticky;top:0;z-index:3;
+  background:var(--ink-2);color:var(--paper);
+  font-size:12.5px;font-weight:600;line-height:1.5;
+  border-bottom:2px solid var(--brass);
+  min-width:150px;
+}
+thead th:first-child{z-index:5;left:0;min-width:128px;width:128px}
+tbody th{
+  position:sticky;left:0;z-index:2;
+  background:var(--paper-2);
+  font-weight:600;font-size:12.5px;color:var(--text);
+  min-width:128px;width:128px;
+  border-right:1px solid #D6D1C4;
+}
+tbody tr:hover td{background:#EFEDE6}
+.sym{font-weight:700;font-size:14px;margin-right:5px;display:inline-block}
+.sym.ok{color:var(--ok)}
+.sym.mid{color:var(--mid)}
+.sym.ng{color:var(--ng)}
+td .cmt{color:var(--text-mute);font-size:12px;display:block;margin-top:1px;line-height:1.55}
+thead a{color:var(--brass);text-decoration:none;border-bottom:1px dotted var(--brass-dim)}
+thead a:hover{color:#E3C179}
+.ext{font-size:11px;color:#9BA6B6;display:block;margin-top:3px;font-weight:400}
+.ext a{color:#9BA6B6;text-decoration:underline}
+.scrollhint{font-size:12px;color:#8A93A2;margin:9px 0 0}
+
+/* ---------- filter chips ---------- */
+.filter{margin:0 0 18px}
+.filter-lab{
+  font-size:11px;letter-spacing:.2em;color:var(--brass);
+  font-weight:600;margin:0 0 10px;
+}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font:inherit;font-size:12.5px;line-height:1.3;
+  padding:9px 13px;cursor:pointer;
+  background:transparent;color:#AEB6C4;
+  border:1px solid rgba(201,164,92,.32);
+  border-radius:2px;
+  display:flex;align-items:center;gap:7px;
+  transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+.chip .tick{color:transparent;font-size:11px;line-height:1}
+.chip[aria-pressed="true"]{
+  background:rgba(201,164,92,.15);
+  border-color:var(--brass);
+  color:var(--paper);
+}
+.chip[aria-pressed="true"] .tick{color:var(--brass)}
+.chip:hover{border-color:var(--brass)}
+.filter-act{display:flex;flex-wrap:wrap;gap:18px;margin-top:12px}
+.filter-act button{
+  font:inherit;font-size:12px;background:none;border:none;padding:0;
+  color:#8F98A7;cursor:pointer;text-decoration:underline;text-underline-offset:3px;
+}
+.filter-act button:hover{color:var(--brass)}
+.filter-note{color:#7C8595;font-size:12px;margin:11px 0 0;line-height:1.6}
+
+/* 列の表示 / 非表示 */
+.t-hide1 thead th:nth-child(2),.t-hide1 tbody td:nth-child(2),
+.t-hide2 thead th:nth-child(3),.t-hide2 tbody td:nth-child(3),
+.t-hide3 thead th:nth-child(4),.t-hide3 tbody td:nth-child(4),
+.t-hide4 thead th:nth-child(5),.t-hide4 tbody td:nth-child(5),
+.t-hide5 thead th:nth-child(6),.t-hide5 tbody td:nth-child(6),
+.t-hide6 thead th:nth-child(7),.t-hide6 tbody td:nth-child(7){display:none}
+.empty-msg{
+  display:none;padding:26px 18px;text-align:center;
+  color:var(--text-mute);font-size:13px;background:var(--paper);
+}
+.is-empty .empty-msg{display:block}
+.is-empty table{display:none}
+
+/* ---------- detail ---------- */
+.card{
+  border:1px solid var(--rule);
+  border-radius:3px;
+  margin:0 0 16px;
+  background:linear-gradient(180deg,rgba(201,164,92,.05),transparent 90px);
+  scroll-margin-top:14px;
+}
+.card > summary{
+  list-style:none;cursor:pointer;
+  padding:18px 20px;
+  display:flex;align-items:flex-start;gap:14px;
+}
+.card > summary::-webkit-details-marker{display:none}
+.card summary .idx{
+  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+  color:var(--brass);font-size:19px;line-height:1.2;flex:0 0 auto;
+}
+.card summary .t{flex:1 1 auto}
+.card summary .name{
+  font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+  font-size:17px;font-weight:600;letter-spacing:.03em;display:block;
+}
+.card summary .sub{font-size:12.5px;color:#98A1B0;display:block;margin-top:3px}
+.card summary .chev{color:var(--brass);font-size:12px;flex:0 0 auto;margin-top:6px}
+.card[open] summary .chev{transform:rotate(180deg)}
+.card summary .chev{transition:transform .18s ease}
+.body{padding:2px 20px 22px}
+dl{margin:0}
+dt{
+  font-size:11.5px;letter-spacing:.13em;color:var(--brass);
+  font-weight:600;margin:18px 0 5px;padding-bottom:5px;
+  border-bottom:1px solid var(--rule);
+}
+dd{margin:0;font-size:13.5px;color:#D5DAE3}
+dd ul{margin:6px 0 0;padding-left:1.1em}
+dd li{margin:3px 0}
+.tbd{color:#D9A96B;font-size:12px;font-style:normal}
+.applybtn{
+  display:inline-block;margin-top:20px;
+  padding:9px 18px;border:1px solid var(--brass);
+  color:var(--brass);text-decoration:none;font-size:13px;letter-spacing:.05em;
+  border-radius:2px;
+}
+.applybtn:hover{background:rgba(201,164,92,.12)}
+
+footer{
+  border-top:1px solid var(--rule);
+  padding:26px 0 46px;font-size:12px;color:#7C8595;line-height:1.85;
+}
+@media (max-width:640px){
+  section{padding:34px 0}
+  header{padding:38px 0 26px}
+  .body{padding:2px 15px 18px}
+  .card > summary{padding:15px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Credit Card Comparison / 2026.07</p>
+    <h1>クレジットカード<span class="gold">6枚</span>、<br>項目別比較</h1>
+    <p class="lede">年会費・還元率・マイル・優待・クレカ積立まで、判断材料を項目ごとに並べました。結論は出していません。表を見て自分の使い方に照らしてください。</p>
+    <div class="asof">
+      情報は2026年7月時点の調査に基づきます。年会費・還元率・入会キャンペーンは変更が頻繁なため、申し込み前に必ず各カードの公式ページで最新条件を確認してください。<br>
+      <span class="tbd">◇ 印</span> の項目は今回の調査で一次情報を確認しきれなかった箇所です。公式ページでの確認が必要です。<br><br>
+      <strong>比較基準について:</strong>「通常還元率」はカードごとに評価軸がずれないよう<strong>円換算</strong>に統一しています。アメックス系のポイントは交換先によって1ポイントの価値が変動するため、額面どおりの還元率にはなりません。「入会ボーナス」も単位が揃わないため<strong>円相当の概算</strong>で並べ、あわせて達成条件の難易度を記号に反映しています(金額が大きくても条件が厳しいものは🔺)。<br>
+      空港ラウンジは性質の異なる<strong>「国内カードラウンジ」</strong>と<strong>「プライオリティ・パス」</strong>を別行に分けています。前者は国内主要空港の共用ラウンジ、後者は世界1,300ヶ所超のVIPラウンジで、無料回数の考え方も異なります。
+    </div>
+    <div class="legend">
+      <span><b class="s-ok">⭕</b> 優れている</span>
+      <span><b class="s-mid">🔺</b> 普通／条件付き</span>
+      <span><b class="s-ng">❌</b> 弱い／なし</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2><span class="num">01</span>サマリー早見表</h2>
+    <p class="sec-note">カード名をタップすると詳細セクションへ移動します。</p>
+
+    <div class="filter">
+      <p class="filter-lab">比較するカードを選ぶ</p>
+      <div class="chips" id="chips">
+        <button class="chip" type="button" data-col="1" aria-pressed="true"><span class="tick">●</span>アメックス GP</button>
+        <button class="chip" type="button" data-col="2" aria-pressed="true"><span class="tick">●</span>セゾンゴールド</button>
+        <button class="chip" type="button" data-col="3" aria-pressed="true"><span class="tick">●</span>三井住友 ゴールド(NL)</button>
+        <button class="chip" type="button" data-col="4" aria-pressed="true"><span class="tick">●</span>三井住友(NL)</button>
+        <button class="chip" type="button" data-col="5" aria-pressed="true"><span class="tick">●</span>ANAアメックス</button>
+        <button class="chip" type="button" data-col="6" aria-pressed="true"><span class="tick">●</span>楽天カード</button>
+      </div>
+      <div class="filter-act">
+        <button type="button" id="selAll">すべて選択</button>
+        <button type="button" id="selNone">すべて解除</button>
+      </div>
+      <p class="filter-note" id="fnote"></p>
+    </div>
+
+    <div class="tablewrap" id="tw">
+    <table>
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th><a href="#c1">アメックス<br>ゴールド・プリファード</a><span class="ext"><a href="https://www.americanexpress.com/ja-jp/credit-cards/gold-preferred-card/" target="_blank" rel="noopener">公式ページ ↗</a></span></th>
+          <th><a href="#c2">セゾンゴールド<br>アメックス</a><span class="ext"><a href="https://www.saisoncard.co.jp/amex/" target="_blank" rel="noopener">公式ページ ↗</a></span></th>
+          <th><a href="#c3">三井住友カード<br>ゴールド(NL)</a><span class="ext"><a href="https://www.smbc-card.com/nyukai/card/gold-numberless.jsp" target="_blank" rel="noopener">公式ページ ↗</a></span></th>
+          <th><a href="#c4">三井住友カード<br>(NL)</a><span class="ext"><a href="https://www.smbc-card.com/nyukai/card/numberless.jsp" target="_blank" rel="noopener">公式ページ ↗</a></span></th>
+          <th><a href="#c5">ANAアメックス<br>ゴールド</a><span class="ext"><a href="https://www.americanexpress.com/ja-jp/benefits/ana-gold-card/" target="_blank" rel="noopener">公式ページ ↗</a></span></th>
+          <th><a href="#c6">楽天カード</a><span class="ext"><a href="https://www.rakuten-card.co.jp/" target="_blank" rel="noopener">公式ページ ↗</a></span></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <th>年会費</th>
+          <td><span class="sym ng">❌</span>39,600円<span class="cmt">家族2枚まで無料</span></td>
+          <td><span class="sym mid">🔺</span>初年度無料<span class="cmt">2年目以降11,000円</span></td>
+          <td><span class="sym ok">⭕</span>5,500円<span class="cmt">年100万利用で永年無料</span></td>
+          <td><span class="sym ok">⭕</span>永年無料<span class="cmt">条件なし</span></td>
+          <td><span class="sym ng">❌</span>34,100円<span class="cmt">家族17,050円</span></td>
+          <td><span class="sym ok">⭕</span>永年無料<span class="cmt">条件なし</span></td>
+        </tr>
+
+        <tr>
+          <th>継続特典</th>
+          <td><span class="sym ok">⭕</span>無料宿泊+クーポン<span class="cmt">年200万利用でFSG</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">—</span></td>
+          <td><span class="sym ok">⭕</span>毎年10,000P<span class="cmt">年100万利用が条件</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">—</span></td>
+          <td><span class="sym mid">🔺</span>SKYコイン1万<span class="cmt">年300万利用+継続マイル</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">—</span></td>
+        </tr>
+
+        <tr>
+          <th>通常還元率<br><span style="font-weight:400;font-size:11px;color:#6C7484">※円換算</span></th>
+          <td><span class="sym mid">🔺</span>0.3〜1.0%<span class="cmt">交換先で大きく変動</span></td>
+          <td><span class="sym mid">🔺</span>0.5%前後<span class="cmt">1,000円=1P</span></td>
+          <td><span class="sym mid">🔺</span>0.5%<span class="cmt">特約店で大きく跳ねる</span></td>
+          <td><span class="sym mid">🔺</span>0.5%<span class="cmt">特約店で大きく跳ねる</span></td>
+          <td><span class="sym mid">🔺</span>1.0%<span class="cmt">マイル換算。円価値は変動</span></td>
+          <td><span class="sym ok">⭕</span>1.0%<span class="cmt">常時1%、条件なし</span></td>
+        </tr>
+
+        <tr>
+          <th>ポイント</th>
+          <td><span class="sym ok">⭕</span>メンバーシップ<br>リワード<span class="cmt">MRプラス付帯で無期限</span></td>
+          <td><span class="sym ok">⭕</span>永久不滅ポイント<span class="cmt">有効期限なし</span></td>
+          <td><span class="sym mid">🔺</span>Vポイント<span class="cmt">1P=1円で充当可</span></td>
+          <td><span class="sym mid">🔺</span>Vポイント<span class="cmt">1P=1円で充当可</span></td>
+          <td><span class="sym ok">⭕</span>メンバーシップ<br>リワード<span class="cmt">ANA移行前提</span></td>
+          <td><span class="sym ok">⭕</span>楽天ポイント<span class="cmt">1P=1円、用途が広い</span></td>
+        </tr>
+
+        <tr>
+          <th>マイル移行</th>
+          <td><span class="sym ok">⭕</span>ANA・JAL両対応<span class="cmt">提携15社超／年間上限◇</span></td>
+          <td><span class="sym mid">🔺</span>JALに強い<span class="cmt">SMC年9,900円で最大1.125%</span></td>
+          <td><span class="sym mid">🔺</span>両対応・低率<span class="cmt">ANA最大70%/JAL最大60%</span></td>
+          <td><span class="sym mid">🔺</span>両対応・低率<span class="cmt">ゴールドと同条件</span></td>
+          <td><span class="sym ok">⭕</span>ANA特化<span class="cmt">1P=1マイル／参加費◇</span></td>
+          <td><span class="sym mid">🔺</span>JALのみ<span class="cmt">ANAは対象外</span></td>
+        </tr>
+
+        <tr>
+          <th>ポイント<br>交換先</th>
+          <td><span class="sym ok">⭕</span>非常に豊富<span class="cmt">航空/ホテル/商品券</span></td>
+          <td><span class="sym ok">⭕</span>豊富<span class="cmt">期限なしで貯めやすい</span></td>
+          <td><span class="sym ok">⭕</span>豊富<span class="cmt">支払充当・投資も可</span></td>
+          <td><span class="sym ok">⭕</span>豊富<span class="cmt">ゴールドと同じ</span></td>
+          <td><span class="sym mid">🔺</span>ANAに集約<span class="cmt">移行後は変更不可</span></td>
+          <td><span class="sym ok">⭕</span>非常に使いやすい<span class="cmt">楽天経済圏で1P=1円</span></td>
+        </tr>
+
+        <tr>
+          <th>特約店還元</th>
+          <td><span class="sym mid">🔺</span>対象加盟店3倍<span class="cmt">旅行系サイトに強い</span></td>
+          <td><span class="sym ng">❌</span>ほぼなし<span class="cmt">海外利用2倍のみ</span></td>
+          <td><span class="sym ok">⭕</span>最大7%<span class="cmt">スマホのタッチ決済限定</span></td>
+          <td><span class="sym ok">⭕</span>最大7%<span class="cmt">スマホのタッチ決済限定</span></td>
+          <td><span class="sym mid">🔺</span>ANA関連中心<span class="cmt">搭乗で+25%ボーナス</span></td>
+          <td><span class="sym ok">⭕</span>楽天市場3%〜<span class="cmt">SPUで大きく上振れ</span></td>
+        </tr>
+
+        <tr>
+          <th>旅行傷害保険</th>
+          <td><span class="sym ok">⭕</span>手厚い<span class="cmt">国内外付帯／補償額◇</span></td>
+          <td><span class="sym mid">🔺</span>標準的<span class="cmt">国内外付帯／補償額◇</span></td>
+          <td><span class="sym mid">🔺</span>国内外2,000万円<span class="cmt">利用付帯／家族特約あり</span></td>
+          <td><span class="sym ng">❌</span>最低限<span class="cmt">利用付帯／補償額◇</span></td>
+          <td><span class="sym ok">⭕</span>海外最高1億円<span class="cmt">治療300万・便遅延も補償</span></td>
+          <td><span class="sym ng">❌</span>海外のみ利用付帯<span class="cmt">国内は対象外</span></td>
+        </tr>
+
+        <tr>
+          <th>ショッピング保険</th>
+          <td><span class="sym ok">⭕</span>付帯<span class="cmt">上限額◇</span></td>
+          <td><span class="sym mid">🔺</span>付帯<span class="cmt">上限額◇</span></td>
+          <td><span class="sym ok">⭕</span>年間300万円<span class="cmt">カード決済のみで対象</span></td>
+          <td><span class="sym ng">❌</span>付帯なし<span class="cmt">ゴールドとの明確な差</span></td>
+          <td><span class="sym ok">⭕</span>付帯<span class="cmt">上限額◇</span></td>
+          <td><span class="sym ng">❌</span>付帯なし<span class="cmt">—</span></td>
+        </tr>
+
+        <tr>
+          <th>カードラウンジ<br>(国内空港)</th>
+          <td><span class="sym ok">⭕</span>回数無制限<span class="cmt">同伴者1名も無料</span></td>
+          <td><span class="sym mid">🔺</span>年2回まで無料<span class="cmt">回数制限あり</span></td>
+          <td><span class="sym ok">⭕</span>主要空港で無料<span class="cmt">同伴者は有料</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">ゴールド以上の特典</span></td>
+          <td><span class="sym ok">⭕</span>回数無制限<span class="cmt">同伴者1名も無料</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">ゴールド以上の特典</span></td>
+        </tr>
+
+        <tr>
+          <th>プライオリティ<br>・パス</th>
+          <td><span class="sym ok">⭕</span>付帯・年2回無料<span class="cmt">3回目以降35米ドル</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">—</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">海外ラウンジは対象外</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">—</span></td>
+          <td><span class="sym ok">⭕</span>付帯・年2回無料<span class="cmt">3回目以降35米ドル</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">プレミアムなら年5回</span></td>
+        </tr>
+
+        <tr>
+          <th>ホテル優待</th>
+          <td><span class="sym ok">⭕</span>無料宿泊あり<span class="cmt">年200万利用でFSG</span></td>
+          <td><span class="sym mid">🔺</span>一休優待など<span class="cmt">予約サイト連携中心</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">宿泊特典は非搭載</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">—</span></td>
+          <td><span class="sym mid">🔺</span>アメックス共通優待<span class="cmt">ホテルコレクション等</span></td>
+          <td><span class="sym mid">🔺</span>楽天トラベル<span class="cmt">ポイント面での優位のみ</span></td>
+        </tr>
+
+        <tr>
+          <th>ダイニング優待</th>
+          <td><span class="sym ok">⭕</span>充実<span class="cmt">招待日和+20%CB</span></td>
+          <td><span class="sym mid">🔺</span>一部あり<span class="cmt">セゾン優待経由</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">還元率で勝負の設計</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">—</span></td>
+          <td><span class="sym mid">🔺</span>アメックス共通優待<span class="cmt">対象範囲◇</span></td>
+          <td><span class="sym ng">❌</span>なし<span class="cmt">—</span></td>
+        </tr>
+
+        <tr>
+          <th>入会ボーナス<br><span style="font-weight:400;font-size:11px;color:#6C7484">※円相当の概算</span></th>
+          <td><span class="sym ok">⭕</span>約10万円相当<span class="cmt">105,000P／高額決済が条件</span></td>
+          <td><span class="sym ng">❌</span>数千円相当<span class="cmt">条件付きCB中心</span></td>
+          <td><span class="sym ok">⭕</span>最大25,000円<span class="cmt">タッチ決済1回で7,000円</span></td>
+          <td><span class="sym ok">⭕</span>最大23,000円<span class="cmt">タッチ決済1回で7,000円</span></td>
+          <td><span class="sym mid">🔺</span>10万円超も可<span class="cmt">3ヶ月180万円と難度高</span></td>
+          <td><span class="sym mid">🔺</span>数千円相当<span class="cmt">時期により変動◇</span></td>
+        </tr>
+
+        <tr>
+          <th>クレカ積立</th>
+          <td><span class="sym ng">❌</span>非対応<span class="cmt">提携証券なし</span></td>
+          <td><span class="sym ng">❌</span>非対応<span class="cmt">主要ネット証券対象外</span></td>
+          <td><span class="sym ok">⭕</span>SBI証券 1.0%<span class="cmt">前年100万利用が条件</span></td>
+          <td><span class="sym mid">🔺</span>SBI証券 0.5%前後<span class="cmt">前年利用額で変動</span></td>
+          <td><span class="sym ng">❌</span>非対応<span class="cmt">主要ネット証券対象外</span></td>
+          <td><span class="sym ok">⭕</span>楽天証券 0.5%<span class="cmt">利用額に左右されず固定</span></td>
+        </tr>
+
+        <tr>
+          <th>国際ブランド</th>
+          <td><span class="sym mid">🔺</span>AMEXのみ<span class="cmt">小規模店で使えない例</span></td>
+          <td><span class="sym mid">🔺</span>AMEXのみ<span class="cmt">同上</span></td>
+          <td><span class="sym ok">⭕</span>Visa / Mastercard<span class="cmt">加盟店最多クラス</span></td>
+          <td><span class="sym ok">⭕</span>Visa / Mastercard<span class="cmt">加盟店最多クラス</span></td>
+          <td><span class="sym mid">🔺</span>AMEXのみ<span class="cmt">同上</span></td>
+          <td><span class="sym ok">⭕</span>4ブランド選択可<span class="cmt">V/MC/JCB/AMEX</span></td>
+        </tr>
+
+        <tr>
+          <th>電子マネー<br>・QR決済</th>
+          <td><span class="sym mid">🔺</span>Apple Pay等<span class="cmt">対応範囲◇</span></td>
+          <td><span class="sym ok">⭕</span>Suica/PASMO対応<span class="cmt">QUICPayも利用可</span></td>
+          <td><span class="sym ok">⭕</span>タッチ決済が主役<span class="cmt">スマホ決済で7%還元</span></td>
+          <td><span class="sym ok">⭕</span>タッチ決済が主役<span class="cmt">スマホ決済で7%還元</span></td>
+          <td><span class="sym mid">🔺</span>Apple Pay等<span class="cmt">対応範囲◇</span></td>
+          <td><span class="sym ok">⭕</span>楽天Pay連携<span class="cmt">チャージで二重取り</span></td>
+        </tr>
+
+        <tr>
+          <th>審査難易度</th>
+          <td><span class="sym mid">🔺</span>やや厳しめ<span class="cmt">—</span></td>
+          <td><span class="sym ok">⭕</span>比較的通りやすい<span class="cmt">—</span></td>
+          <td><span class="sym mid">🔺</span>ゴールド独自基準<span class="cmt">安定継続収入が必要</span></td>
+          <td><span class="sym ok">⭕</span>通りやすい<span class="cmt">満18歳以上(高校生除く)</span></td>
+          <td><span class="sym mid">🔺</span>やや厳しめ<span class="cmt">—</span></td>
+          <td><span class="sym ok">⭕</span>通りやすい<span class="cmt">—</span></td>
+        </tr>
+
+        <tr>
+          <th>発行スピード</th>
+          <td><span class="sym mid">🔺</span>審査は最短即日<span class="cmt">カード郵送に約1週間</span></td>
+          <td><span class="sym ok">⭕</span>デジタル発行可<span class="cmt">最短即日で使える</span></td>
+          <td><span class="sym ok">⭕</span>最短10秒<span class="cmt">番号発行、夜間は枠制限</span></td>
+          <td><span class="sym ok">⭕</span>最短10秒<span class="cmt">番号発行、夜間は枠制限</span></td>
+          <td><span class="sym mid">🔺</span>審査は最短当日<span class="cmt">カード郵送に約1週間</span></td>
+          <td><span class="sym mid">🔺</span>1週間前後<span class="cmt">郵送のみ</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+    <div class="empty-msg">カードが選択されていません。上のボタンから1枚以上選んでください。</div>
+    </div>
+    <p class="scrollhint" id="hint">← 表は横にスクロールできます →</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  var tw    = document.getElementById('tw');
+  var table = tw.querySelector('table');
+  var chips = [].slice.call(document.querySelectorAll('.chip'));
+  var hint  = document.getElementById('hint');
+  var note  = document.getElementById('fnote');
+
+  function render(){
+    var on = chips.filter(function(c){ return c.getAttribute('aria-pressed') === 'true'; });
+
+    chips.forEach(function(c){
+      var col = c.getAttribute('data-col');
+      var off = c.getAttribute('aria-pressed') !== 'true';
+      tw.classList.toggle('t-hide' + col, off);
+    });
+
+    tw.classList.toggle('is-empty', on.length === 0);
+
+    // 表示列数に応じて最小幅を調整（列が少なければ横スクロールが消える）
+    table.style.minWidth = on.length ? (128 + on.length * 152) + 'px' : '0';
+
+    // 横スクロールが実際に発生しているときだけヒントを出す
+    requestAnimationFrame(function(){
+      var scrolls = tw.scrollWidth > tw.clientWidth + 2;
+      hint.style.display = (scrolls && on.length) ? '' : 'none';
+    });
+
+    note.textContent = on.length
+      ? on.length + '枚を表示中。スマホでは2〜3枚に絞ると横スクロールなしで見られます。'
+      : '';
+  }
+
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      var next = c.getAttribute('aria-pressed') !== 'true';
+      c.setAttribute('aria-pressed', String(next));
+      render();
+    });
+  });
+
+  document.getElementById('selAll').addEventListener('click', function(){
+    chips.forEach(function(c){ c.setAttribute('aria-pressed','true'); });
+    render();
+  });
+  document.getElementById('selNone').addEventListener('click', function(){
+    chips.forEach(function(c){ c.setAttribute('aria-pressed','false'); });
+    render();
+  });
+
+  // 詳細セクションへのリンクを踏んだとき、そのカードが非表示なら表側でも選択しておく
+  document.querySelectorAll('thead a[href^="#c"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var d = document.querySelector(a.getAttribute('href'));
+      if (d) d.open = true;
+    });
+  });
+
+  // 画面幅が狭い初回表示では3枚に絞る
+  if (window.innerWidth < 760) {
+    chips.forEach(function(c, i){
+      if (i > 2) c.setAttribute('aria-pressed','false');
+    });
+  }
+
+  window.addEventListener('resize', render);
+  render();
+})();
+</script>
+
+<section>
+  <div class="wrap">
+    <h2><span class="num">02</span>カード別の詳細</h2>
+    <p class="sec-note">見出しをタップすると開きます。情報量の多い項目のみ深掘りしています。</p>
+
+    <!-- 1 -->
+    <details class="card" id="c1">
+      <summary>
+        <span class="idx">01</span>
+        <span class="t">
+          <span class="name">アメリカン・エキスプレス・ゴールド・プリファード・カード</span>
+          <span class="sub">年会費 39,600円(税込)／家族カード2枚まで無料、3枚目以降19,800円</span>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="body">
+        <dl>
+          <dt>マイル移行</dt>
+          <dd>ANA・JALを含む提携航空会社15社以上へ移行可能。「メンバーシップ・リワード・プラス」が無料で自動付帯するため、移行レートは通常より優遇されます。<br>
+          ただし<strong>アメックスのプロパーカードはANAマイルへの年間移行上限が設けられており、40,000マイル程度とされています</strong>。ANAマイルを大量に貯める目的なら、上限のないANAアメックス系の方が適しています。<span class="tbd">◇ 移行レート・年間上限・ANA移行の年間参加費の正確な数値は公式ページで要確認。</span></dd>
+
+          <dt>ポイント交換先・有効期限</dt>
+          <dd>メンバーシップ・リワード。メンバーシップ・リワード・プラスが無料付帯するため<strong>ポイント有効期限は無期限</strong>。航空マイル、ホテルポイント(ヒルトン・オナーズ、Marriott Bonvoy等)、商品券、カード利用代金への充当など交換先は非常に幅広い構成です。</dd>
+
+          <dt>特約店・ボーナス還元</dt>
+          <dd>
+            <ul>
+              <li>基本:100円 = 1ポイント</li>
+              <li>対象加盟店:100円 = 3ポイント</li>
+              <li>アメックス・トラベル オンライン経由のホテル/レンタカー/国内航空券:100円 = 4ポイント</li>
+            </ul>
+          </dd>
+
+          <dt>旅行傷害保険</dt>
+          <dd>海外・国内ともに付帯。<span class="tbd">◇ 補償上限額、自動付帯か利用付帯かの別、携行品損害の条件は公式の約款で要確認。</span>スマートフォン破損に対する補償も用意されています。</dd>
+
+          <dt>空港ラウンジ(2種類あります)</dt>
+          <dd>性質の異なる2つの特典が付帯します。混同しやすいので分けて記載します。
+            <ul>
+              <li><strong>① 国内カードラウンジ:回数無制限</strong><br>
+              国内主要空港の共用ラウンジ。受付でカードと当日の搭乗券を提示するだけで利用でき、<strong>本会員+同伴者1名、家族カード会員+同伴者1名まで無料</strong>。利用回数の制限はありません。出発時だけでなく到着時も利用可能。<br>
+              ※羽田第2ターミナル国際線の POWER LOUNGE PREMIUM はプラチナ以上限定で、ゴールド・プリファードでは利用できません。</li>
+              <li><strong>② プライオリティ・パス:年2回まで無料</strong><br>
+              国内外1,300ヶ所以上のVIPラウンジが対象。通常99米ドル〜の年会費が無料になり、1回35米ドルの利用料が<strong>年間2回まで無料</strong>。3回目以降と同伴者は1名につき35米ドル。<br>
+              ※アメックス経由のプライオリティ・パスは<strong>国際線出発ラウンジのみ</strong>が対象で、国際線到着ラウンジ・国内線の出発/到着ラウンジには使えません。</li>
+            </ul>
+            つまり国内移動が中心なら①で足り、②は海外渡航時の上振れ特典という位置づけになります。
+          </dd>
+
+          <dt>ホテル優待</dt>
+          <dd><strong>フリー・ステイ・ギフト</strong>:年間200万円の決済達成でカード継続時に無料宿泊が受けられます。対象ホテルは40施設規模で、内容はプラチナ・カードの継続特典とほぼ同水準とされています。<br>また継続特典として、ゴールド会員向け予約サイト「ザ・ホテル・コレクション」の国内対象ホテルで2泊以上の予約に使える15,000円クーポンも用意されています。</dd>
+
+          <dt>ダイニング優待</dt>
+          <dd>「ゴールド・ダイニング by 招待日和」(対象店で2名以上のコース予約時、1名分無料)、および「ポケットコンシェルジュ」での予約・決済ごとに<strong>20%キャッシュバック(年間最大10,000円)</strong>。</dd>
+
+          <dt>入会ボーナス</dt>
+          <dd>2026年7月時点で<strong>合計105,000ポイント</strong>。年会費39,600円の約3年分に相当する規模です。獲得には入会後の一定期間内に高額の決済条件を満たす必要があり、決済期間はカード<em>発行日</em>起算(カード到着日ではない)である点に注意。<span class="tbd">◇ 具体的な利用金額の条件と期限は公式キャンペーンページで要確認。</span></dd>
+
+          <dt>クレカ積立</dt>
+          <dd><strong>非対応。</strong>このカードでのクレカ積立に対応している証券会社はありません。積立目的では選択肢に入りません。</dd>
+        </dl>
+        <a class="applybtn" href="https://www.americanexpress.com/ja-jp/credit-cards/gold-preferred-card/" target="_blank" rel="noopener">公式ページで確認する ↗</a>
+      </div>
+    </details>
+
+    <!-- 2 -->
+    <details class="card" id="c2">
+      <summary>
+        <span class="idx">02</span>
+        <span class="t">
+          <span class="name">セゾンゴールド・アメリカン・エキスプレス・カード</span>
+          <span class="sub">初年度年会費無料／2年目以降 11,000円(税込)、家族カード1,100円</span>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="body">
+        <dl>
+          <dt>まず注意:同名カードが複数あります</dt>
+          <dd>セゾンには「セゾンゴールド・アメリカン・エキスプレス・カード」「同(年会費優遇型)」「セゾンローズゴールド」「セゾンゴールド・アソシエ」など名称の近いカードが複数存在し、<strong>特典もマイル対応も異なります</strong>。特に<strong>年会費優遇型はSAISON MILE CLUBの対象外</strong>です。申し込み時にカード名を正確に確認してください。</dd>
+
+          <dt>マイル移行(JALに強い)</dt>
+          <dd><strong>SAISON MILE CLUB</strong>(サービス年会費9,900円 ※対象カードにより5,500円)に登録すると、ショッピング利用1,000円につき10 JALマイルが自動で貯まります。永久不滅ポイント優遇分をJALマイルに交換した場合の合計還元率は<strong>最大1.125%</strong>。年間移行上限は150,000マイルで、上限到達時は翌年のサービス年会費が無料になります。<br>ANAマイルへは永久不滅ポイントからの交換で対応。</dd>
+
+          <dt>トレードオフ</dt>
+          <dd>SAISON MILE CLUB登録中は永久不滅ポイントの優遇サービス対象外となり、有効期限なしで貯められるという永久不滅ポイントの利点が薄れます。またJALマイル自体は獲得月から36ヶ月の期限付きです。</dd>
+
+          <dt>ポイント交換先・有効期限</dt>
+          <dd>永久不滅ポイント。<strong>有効期限なし</strong>で、失効を気にせず貯められる点が最大の特徴。クレジットショッピング1,000円(税込)ごとに1ポイント。交換先はJAL/ANAマイル、ギフト券、アイテム、ポイント運用サービスなど。</dd>
+
+          <dt>特約店・ボーナス還元</dt>
+          <dd>海外利用でポイント2倍。国内の特約店還元は三井住友NL系ほど尖っておらず、日常決済の還元率で選ぶカードではありません。</dd>
+
+          <dt>旅行傷害保険</dt>
+          <dd>国内・海外ともに付帯。<span class="tbd">◇ 補償額と自動/利用付帯の別は公式の補償規定で要確認。</span></dd>
+
+          <dt>空港ラウンジ・旅行サービス</dt>
+          <dd>国内主要空港ラウンジが年2回まで無料。加えて<strong>手荷物無料宅配</strong>が強力で、海外旅行帰国時にスーツケース1個を空港から自宅まで無料配送。往路はスーツケース1個につき15%OFF、復路は1個まで無料(2個目以降15%OFF)。同伴者も割引対象です。</dd>
+
+          <dt>入会ボーナス</dt>
+          <dd>他の5枚に比べて<strong>控えめ</strong>。2026年7月時点では初年度年会費無料が中心で、別途CDエナジーダイレクトの電気・ガス支払い設定+3万円以上の利用を条件とするキャッシュバック企画などが実施されています(申込期間 2026年1月7日〜12月24日)。過去に同系カードを保有していた場合は対象外。</dd>
+
+          <dt>クレカ積立</dt>
+          <dd><strong>非対応。</strong>SBI証券・楽天証券・マネックス証券などの主要ネット証券のクレカ積立対象に含まれていません。</dd>
+        </dl>
+        <a class="applybtn" href="https://www.saisoncard.co.jp/amex/" target="_blank" rel="noopener">公式ページで確認する ↗</a>
+      </div>
+    </details>
+
+    <!-- 3 -->
+    <details class="card" id="c3">
+      <summary>
+        <span class="idx">03</span>
+        <span class="t">
+          <span class="name">三井住友カード ゴールド(NL)</span>
+          <span class="sub">年会費 5,500円(税込)／年間100万円利用で翌年以降永年無料</span>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="body">
+        <dl>
+          <dt>年会費の考え方</dt>
+          <dd>通常5,500円ですが、<strong>年間100万円の利用で翌年以降の年会費が永年無料</strong>になります。さらに<strong>継続特典として毎年10,000ポイント</strong>が付与されるため、ちょうど100万円を利用した年の実質還元率は1.5%に達します。<br>※クレカ積立の利用金額は年会費永年無料判定の対象外である点に注意。</dd>
+
+          <dt>マイル移行</dt>
+          <dd>Vポイントから<strong>ANAマイル(交換率 最大70%)</strong>、<strong>JALマイル(交換率 最大60%)</strong>へ交換可能。WAONポイント等への交換にも対応。マイル特化カードではないため、移行レートは航空系提携カードに劣ります。</dd>
+
+          <dt>ポイント交換先</dt>
+          <dd>Vポイント。カード利用代金への充当、VポイントPayギフト経由での店頭利用、他社ポイント/マイルへの交換など。現金同様に使える柔軟性が強みです。<span class="tbd">◇ ポイント有効期限は公式で要確認。</span></dd>
+
+          <dt>特約店還元(最大の武器)</dt>
+          <dd>
+            <ul>
+              <li>対象のコンビニ・飲食店で<strong>スマホのタッチ決済</strong>利用時に7%還元(セブン-イレブン、ローソン、マクドナルド、サイゼリヤ、ドトール等)</li>
+              <li>セブン-イレブンではアプリ会員コード提示等の併用で最大10%還元</li>
+              <li><strong>家族ポイント</strong>:二親等内の家族に対象カード本会員がいると人数に応じて+1%、最大+5%</li>
+              <li>通常のポイント分を含め対象店舗で最大20%還元の設計</li>
+            </ul>
+            <strong>注意:</strong>7%還元はスマホのタッチ決済が条件。カード現物のタッチ決済、iD、差し込み、磁気取引は対象外です。
+          </dd>
+
+          <dt>旅行傷害保険・ショッピング保険</dt>
+          <dd><strong>ショッピング保険(お買物安心保険)は年間最高300万円</strong>。購入日および翌日から200日間が対象で、<strong>リボ・分割を条件とせずカード決済のみで対象</strong>になる点が実用上の強みです(他社では分割払い限定の例が多い)。一般カードの三井住友カード(NL)には付帯しないため、両者の明確な差になります。<br>
+          旅行傷害保険は<strong>国内・海外ともに最高2,000万円</strong>で、「旅行安心プラン(利用付帯)」を含む7つのプランから選択する方式。<strong>家族特約あり</strong>。<span class="tbd">◇ 治療費用・携行品損害など項目別の補償額は公式の約款で要確認。</span></dd>
+
+          <dt>空港ラウンジ</dt>
+          <dd>国内主要空港の<strong>カードラウンジ</strong>が無料で利用可能。同伴者は有料です。<strong>プライオリティ・パスは付帯しません</strong>ので、海外のVIPラウンジは対象外になります。</dd>
+
+          <dt>入会ボーナス</dt>
+          <dd>2026年7月時点で<strong>新規入会+条件達成で最大25,000円相当のVポイント</strong>(申込期間 2026年6月1日〜、要エントリー)。
+            <ul>
+              <li>土台となる「スマートタッチプラン」:新規入会後にスマホのタッチ決済を1回以上利用で最大7,000円分。少額決済1回で達成可能</li>
+              <li>SBI証券の口座開設・クレカ積立などの条件達成で18,000円相当を上乗せ</li>
+            </ul>
+            なお公式サイトでは申込期間2026年7月23日〜9月30日で<strong>最大31,000円相当</strong>の案内も出ています(条件が異なるため要確認)。<br>過去に解約経験がある人向けには2026年7月1日〜8月31日にカムバックキャンペーン(再入会+タッチ決済1回+合計8万円以上利用で3,000円分)。</dd>
+
+          <dt>クレカ積立(SBI証券)</dt>
+          <dd>付与率は<strong>前年のカード利用額</strong>で決まります。
+            <ul>
+              <li>入会初年度:1.0%</li>
+              <li>2年目以降 前年100万円以上利用:1.0%</li>
+              <li>前年10万円以上:0.75%</li>
+              <li>前年10万円未満:0%</li>
+            </ul>
+            <strong>実質的な上限は1.0%</strong>と考えてください。「最大3.0%」という表記も見られますが、これはOlive資産運用サービスの特典上乗せ等の条件を積んだ場合の数値で、通常のカード利用だけでは到達しません。<br>
+            月5万円積立×1.0%なら月500ポイント、月10万円なら月1,000ポイント。<br>
+            <strong>注意:</strong>クレカ積立の利用金額は、年会費永年無料の判定となる「年間100万円」にも、付与率判定の年間カード利用額にも<strong>含まれません</strong>。積立とは別に100万円の決済実績が必要です。</dd>
+        </dl>
+        <a class="applybtn" href="https://www.smbc-card.com/nyukai/card/gold-numberless.jsp" target="_blank" rel="noopener">公式ページで確認する ↗</a>
+      </div>
+    </details>
+
+    <!-- 4 -->
+    <details class="card" id="c4">
+      <summary>
+        <span class="idx">04</span>
+        <span class="t">
+          <span class="name">三井住友カード(NL)</span>
+          <span class="sub">年会費 永年無料／満18歳以上(高校生除く)</span>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="body">
+        <dl>
+          <dt>位置づけ</dt>
+          <dd>ゴールド(NL)の下位グレード。特約店還元はゴールドとほぼ同水準を年会費無料で得られる一方、保険・ラウンジ・継続特典・積立還元率で差がつきます。<strong>年間100万円以上を利用するとゴールド(NL)への年会費永年無料アップグレード案内が届く</strong>ため、まずここから始めて実績を作る選択肢もあります(アップグレードには審査あり)。</dd>
+
+          <dt>マイル移行</dt>
+          <dd>ゴールド(NL)と同じくVポイント経由。ANAマイル最大70%、JALマイル最大60%の交換率。</dd>
+
+          <dt>ポイント交換先</dt>
+          <dd>Vポイント。利用代金充当、VポイントPayギフト、他社ポイント交換など。ゴールドと共通です。</dd>
+
+          <dt>特約店還元</dt>
+          <dd>
+            <ul>
+              <li>対象コンビニ・飲食店でスマホのタッチ決済により<strong>200円(税込)につき7%還元</strong></li>
+              <li>セブン-イレブンでアプリ会員コード提示等の併用で<strong>最大10%還元</strong></li>
+              <li>家族ポイントで最大+5%</li>
+            </ul>
+            日常の少額決済における還元効率は6枚中トップクラスです。
+          </dd>
+
+          <dt>旅行傷害保険・ショッピング保険</dt>
+          <dd><strong>ショッピング保険は付帯しません。</strong>ゴールド(NL)には年間最高300万円のお買物安心保険が付くため、ここが両者の明確な差の一つです。<br>
+          旅行傷害保険は付帯しますが、事前に旅費を当該カードで決済することが前提の<strong>利用付帯</strong>で、補償内容もゴールド(2,000万円)より抑えられています。<span class="tbd">◇ 補償額の詳細は公式で要確認。</span>保険目的で選ぶカードではありません。</dd>
+
+          <dt>空港ラウンジ</dt>
+          <dd><strong>なし。</strong>ゴールド以上のグレードの特典です。</dd>
+
+          <dt>発行スピード・仕様</dt>
+          <dd>申し込みから<strong>最短10秒でカード番号発行</strong>(受付時間制限あり)。ナンバーレス仕様でカード券面に番号・有効期限・セキュリティコードの印字がなく、Vpassアプリで確認する方式。裏面に署名欄のないサインパネルレスカード。<br>※ネットショッピング利用にはVpassアプリのダウンロードが必要。<br>※夜間帯に即時発行を申し込んだ場合、審査完了までの利用枠は5万円に制限されます。</dd>
+
+          <dt>入会ボーナス</dt>
+          <dd>2026年7月時点で<strong>新規入会+条件達成で最大23,000円相当</strong>(申込期間 2026年6月1日〜、要エントリー)。ゴールド(NL)の最大25,000円相当より2,000円分少ない設定です。学生向けにはVポイントPayギフト1,000円分の特典も別途あります。</dd>
+
+          <dt>クレカ積立(SBI証券)</dt>
+          <dd>対応。付与率は前年のカード利用額に応じて変動する仕組みで、<strong>0.5%前後</strong>が基本水準。ゴールド(NL)の1.0%と比べると積立面では明確に劣ります。<span class="tbd">◇ 利用額別の付与率テーブルは公式で要確認。</span><br>なお年間カード利用額の判定に「三井住友カード つみたて投資」の積立金額は含まれません。</dd>
+        </dl>
+        <a class="applybtn" href="https://www.smbc-card.com/nyukai/card/numberless.jsp" target="_blank" rel="noopener">公式ページで確認する ↗</a>
+      </div>
+    </details>
+
+    <!-- 5 -->
+    <details class="card" id="c5">
+      <summary>
+        <span class="idx">05</span>
+        <span class="t">
+          <span class="name">ANAアメリカン・エキスプレス・ゴールド・カード</span>
+          <span class="sub">年会費 34,100円(税込)／家族カード 17,050円(税込)</span>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="body">
+        <dl>
+          <dt>位置づけ</dt>
+          <dd>ANAマイルを効率よく貯めたい人、将来的にSFC(スーパーフライヤーズカード)化を狙う人に選ばれる1枚。<strong>ANA一択の設計</strong>で、JALマイルは対象外です。汎用性より特化性で選ぶカードになります。家族カードが17,050円と高額で、ANAカードの中でも突出している点は留意が必要です。</dd>
+
+          <dt>マイル移行</dt>
+          <dd>
+            <ul>
+              <li>メンバーシップ・リワードのポイントを<strong>1ポイント = 1 ANAマイル</strong>で移行。基本の獲得レートは1,000円 = 10マイル(1.0%)</li>
+              <li>移行は自動ではなく<strong>都度申請制</strong>。1日1回まで、1日の移行上限は999,000ポイント</li>
+              <li>移行完了までの期間は通常5営業日以内(一般カードは初回2週間)</li>
+              <li>ANA便搭乗時にフライトマイルへ<strong>+25%のボーナスマイル</strong>が加算</li>
+              <li>年会費支払い時に継続ボーナスマイルが付与(年会費支払月の翌月末頃に加算)</li>
+            </ul>
+            <span class="tbd">◇ 重要:「メンバーシップ・リワード ANAマイル移行プログラム」の年間参加費6,600円がゴールドでも必要かどうかは、情報源によって記述が分かれています。</span>アメックス公式のマイル移行ページでは参加費の必要性が一般カードの文脈で説明されており、ゴールドについては移行期間のみが記載されています。一方、年間参加費6,600円が必要とする解説も複数存在します。<strong>年間コストに直結するため、申し込み前に必ずアメックスに直接確認してください。</strong>
+          </dd>
+
+          <dt>ポイント交換先</dt>
+          <dd>メンバーシップ・リワード。ただし本カードは<strong>ANAマイルへの移行を前提とした設計</strong>のため、実質的な使い道はANAマイルに集約されます。汎用ポイントとしての使い勝手を求めるならゴールド・プリファードの方が上です。<strong>一度マイル移行を申し込むと変更・キャンセルはできません。</strong></dd>
+
+          <dt>継続特典 / ANA SKY コイン</dt>
+          <dd>毎年1月1日〜12月31日の期間で<strong>300万円以上利用すると、翌年にANA SKYコイン10,000コイン(10,000円相当)</strong>を獲得できます。通常還元1.0%と合算すると、300万円利用時の実質還元率は約1.3%まで上がる計算になります。ただし300万円というハードルは三井住友ゴールド(NL)の100万円に比べてかなり高い設定です。</dd>
+
+          <dt>旅行傷害保険</dt>
+          <dd>6枚中で最も手厚い部類です。
+            <ul>
+              <li>海外旅行傷害保険:<strong>最高1億円(利用付帯)</strong>。家族カード会員は最高5,000万円</li>
+              <li>傷害・疾病治療費用:最大300万円</li>
+              <li>賠償責任:最高4,000万円</li>
+              <li>救援者費用、<strong>航空便遅延・手荷物紛失補償</strong>を含む</li>
+            </ul>
+            航空便遅延により生じた宿泊代・食事代、手荷物の到着遅延や紛失による衣類・生活必需品の購入費用まで補償される点は、旅行頻度が高い人には実用的です。一般カード(最高3,000万円)との差も大きくなっています。
+          </dd>
+
+          <dt>空港ラウンジ(2種類あります)</dt>
+          <dd>
+            <ul>
+              <li><strong>① 国内カードラウンジ:回数無制限</strong><br>
+              国内主要空港の共用ラウンジを、本会員+同伴者1名まで無料で利用可能。</li>
+              <li><strong>② プライオリティ・パス:年2回まで無料</strong><br>
+              世界1,400ヶ所以上のVIPラウンジが対象で、年会費無料で付帯します。年2回まで利用料がかからず、3回目以降は1回につき35米ドル。<strong>家族カードを発行していれば家族も利用可能</strong>です。</li>
+            </ul>
+            この点はゴールド・プリファードとほぼ同条件で、「ANA特化カードだからラウンジは国内だけ」ということはありません。
+          </dd>
+
+          <dt>ホテル・ダイニング優待</dt>
+          <dd>アメックス会員向けの共通優待(ザ・ホテル・コレクション、アメリカン・エキスプレス・セレクト等)が利用可能。<span class="tbd">◇ ゴールド・プリファード限定特典(フリー・ステイ・ギフト、招待日和等)との対象範囲の違いは公式で要確認。</span></dd>
+
+          <dt>入会ボーナス</dt>
+          <dd>2026年7月時点で<strong>合計68,000マイル相当</strong>(内訳:入会ボーナス2,000マイル+利用額達成ボーナス)。
+            <ul>
+              <li>入会時:2,000マイル</li>
+              <li>入会後3ヶ月以内に60万円達成:16,000ポイント</li>
+              <li>同100万円達成:12,000ポイント</li>
+              <li>同180万円達成:20,000ポイント</li>
+            </ul>
+            マイル価値を1マイル2円と見れば13万円超に相当する規模ですが、<strong>満額獲得には3ヶ月で180万円という高いハードル</strong>があり、6枚の中で最も達成難度が高い設計です。月60万円ペースの決済が必要になります。一部媒体では最大70,000マイルの表記もあり条件が異なるため、申し込み前に公式で確認してください。<br>
+            <strong>対象外条件:</strong>ANAアメックス各カード(一般・ゴールド・プレミアム・SFC系)を既に保有中、または過去に保有し再入会する場合は原則キャンペーン対象外。一般カードからゴールドへの切替も原則対象外です。<br>
+            別途、初めて作る人限定の紹介制度「マイ友プログラム」で2,000マイル。</dd>
+
+          <dt>クレカ積立</dt>
+          <dd><strong>非対応。</strong>主要ネット証券のクレカ積立対象外です。</dd>
+
+          <dt>審査・発行</dt>
+          <dd>最短当日に審査結果が通知され、通過から1週間程度で自宅にカードが配送されます。</dd>
+        </dl>
+        <a class="applybtn" href="https://www.americanexpress.com/ja-jp/benefits/ana-gold-card/" target="_blank" rel="noopener">公式ページで確認する ↗</a>
+      </div>
+    </details>
+
+    <!-- 6 -->
+    <details class="card" id="c6">
+      <summary>
+        <span class="idx">06</span>
+        <span class="t">
+          <span class="name">楽天カード</span>
+          <span class="sub">年会費 永年無料／積立比較の基準として</span>
+        </span>
+        <span class="chev">▼</span>
+      </summary>
+      <div class="body">
+        <dl>
+          <dt>位置づけ</dt>
+          <dd>年会費無料で通常還元率1.0%という素直な設計。ゴールド系のような優待・保険はほぼ無く、<strong>還元率とクレカ積立の比較基準</strong>として意味を持つ1枚です。上位グレード(楽天ゴールド11,000円未満、楽天プレミアム11,000円)を選ぶとラウンジ等が付きますが、本比較では一般カードを対象としています。</dd>
+
+          <dt>マイル移行</dt>
+          <dd><strong>JALマイルと相互交換可能</strong>(2022年5月開始)。ANAマイルへの直接交換は対象外です。マイル獲得効率で選ぶカードではなく、あくまで副次的な出口という位置づけになります。</dd>
+
+          <dt>ポイント交換先・使い道</dt>
+          <dd>楽天ポイント。使い勝手は6枚中でも随一で、
+            <ul>
+              <li>楽天市場・楽天トラベル・楽天ブックス等で1ポイント=1円</li>
+              <li>「ポイントで支払いサービス」でカード利用代金に1ポイント=1円で充当</li>
+              <li>楽天証券で投資信託・米国株の購入に利用可能</li>
+              <li>JALマイルへ交換</li>
+            </ul>
+            ほぼ現金同様に扱える点が強みです。
+          </dd>
+
+          <dt>特約店還元</dt>
+          <dd>通常1.0%。楽天市場では最低でも3%相当で、SPU(スーパーポイントアッププログラム)の条件達成を積み上げると大きく上振れします。楽天銀行での引き落とし設定で+0.5%など、<strong>楽天経済圏をどれだけ使うかで実力が大きく変わる</strong>設計です。逆に楽天経済圏を使わない人にとっては「1.0%の無料カード」以上にはなりません。</dd>
+
+          <dt>旅行傷害保険・ショッピング保険</dt>
+          <dd>海外旅行傷害保険は利用付帯のみで、<strong>国内旅行傷害保険は対象外</strong>。ショッピング保険も原則付帯しません。保険を求めるなら上位グレードか他カードを検討する必要があります。</dd>
+
+          <dt>空港ラウンジ</dt>
+          <dd><strong>なし。</strong>楽天ゴールドカードで年2回無料、楽天プレミアムカードでプライオリティ・パス(年5回まで無料)が付帯します。</dd>
+
+          <dt>国際ブランド</dt>
+          <dd><strong>Visa / Mastercard / JCB / AMEX の4種類から選択可能</strong>で、6枚中最も選択肢が広い構成。さらに2枚目のカードも年会費永年無料で発行でき、ブランドや引き落とし口座を分けた使い分けができます。</dd>
+
+          <dt>入会ボーナス</dt>
+          <dd>新規入会+利用で数千ポイント規模が一般的。<span class="tbd">◇ 時期により金額が変動するため公式キャンペーンページで要確認。</span>(参考:楽天プレミアムカードは2026年7月時点で最大8,000ポイント)</dd>
+
+          <dt>クレカ積立(楽天証券)</dt>
+          <dd>対応。<strong>年間カード利用額に関係なく還元率が固定</strong>されており、三井住友のような利用額連動の複雑さがないのが特徴です。
+            <ul>
+              <li>還元率は<strong>カードの種類 × 投資信託の代行手数料</strong>で決まる</li>
+              <li>代行手数料0.4%未満の低コストインデックスファンド(eMAXIS Slim等)の場合、一般カード・ゴールドカードともに<strong>0.5%還元</strong>が基本</li>
+              <li>楽天プレミアムカードは銘柄を問わず一律1.0%</li>
+              <li>楽天キャッシュとの併用で月15万円まで積立可能</li>
+              <li>家族カード、楽天銀行デビットカード、楽天ポイントカードは対象外。証券口座の名義とカード名義の一致が必要</li>
+              <li>個別株・ETFは対象外(投資信託のみ)</li>
+            </ul>
+            <strong>比較の要点:</strong>低コストインデックスファンドを積み立てる前提だと楽天カードは0.5%。三井住友ゴールド(NL)は年100万円以上の利用実績があれば1.0%となり、この条件下ではゴールド(NL)が有利です。逆に年間のカード利用額が少ない人は、楽天カードの方が条件に左右されず安定します。
+          </dd>
+        </dl>
+        <a class="applybtn" href="https://www.rakuten-card.co.jp/" target="_blank" rel="noopener">公式ページで確認する ↗</a>
+      </div>
+    </details>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    本資料は2026年7月時点の公開情報をもとに作成した比較メモです。年会費・還元率・入会キャンペーン・付帯保険の条件はいずれも変更される可能性があり、特に入会キャンペーンは期限と達成条件が頻繁に改定されます。申し込みの前に必ず各カードの公式ページで最新の条件を確認してください。<br>
+    <span class="tbd">◇ 印</span>の項目は一次情報を確認しきれていないため、公式の約款・カード規定での確認が必要です。
+  </div>
+</footer>
+
+</body>
+</html>
